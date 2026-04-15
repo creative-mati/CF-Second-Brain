@@ -257,7 +257,8 @@ All skills live in the `skills/` directory at the repo root — one source of tr
 | File | For | Purpose |
 |------|-----|---------|
 | `SKILL.md` | Claude Code | Main skill — `sb` prefix, auto-classification, tool parameters |
-| `second-brain.mdc` | Cursor | Same behavior, Cursor `.mdc` format |
+| `second-brain.mdc` | Cursor | Self-contained rule — tools, classification, vault schema, behavioral rules |
+| `vault-schema.md` | Both | Content type definitions, frontmatter templates, behavioral rules, tags |
 | `capture-processing.md` | Both | Detailed pipeline for processing raw input into structured entries |
 | `obsidian-markdown.md` | Both | Obsidian-flavored markdown formatting rules |
 | `query-review.md` | Both | Search, review, and reporting procedures |

@@ -161,3 +161,45 @@ No params. Rebuilds vault/index.md. Call after 3+ vault writes in one session.
 4. **Extract entities** — names become `participants`/`attendees`, system names become `project`
 5. **Infer metadata** — priority, status, domain, tags from context. Don't ask the user.
 6. **Report back concisely** — after saving, list what was created (type, title, any stubs) in 1-2 lines per file
+
+## Vault Schema
+
+### Decisions
+- Directory: `vault/decisions/` — Naming: `YYYY-MM-DD-short-slug.md`
+- Frontmatter: `type: decision`, `date`, `status` (active | superseded | revisit), `domain[]`, `participants[]`, `related_decisions[]`, `tags[]`
+
+### Tasks
+- Directory: `vault/tasks/` — Naming: `YYYY-MM-DD-short-slug.md`
+- Frontmatter: `type: task`, `date`, `status` (open | in-progress | blocked | done | cancelled), `priority` (p0-critical | p1-high | p2-medium | p3-low), `waiting_on`, `due`, `source`, `tags[]`
+
+### Meeting Notes
+- Directory: `vault/meetings/` — Naming: `YYYY-MM-DD-meeting-topic.md`
+- Frontmatter: `type: meeting`, `date`, `attendees[]`, `project`, `tags[]`
+
+### People
+- Directory: `vault/people/` — Naming: `firstname-lastname.md`
+- Frontmatter: `type: person`, `role`, `team`, `last_mentioned`
+
+### Projects
+- Directory: `vault/projects/` — Naming: `project-name.md`
+- Frontmatter: `type: project`, `status`, `last_updated`
+
+### Weekly Reviews
+- Directory: `vault/weekly/` — Naming: `YYYY-WXX.md`
+
+## Behavioral Rules
+
+1. **Low friction above all** — never ask follow-up questions when processing input. Make reasonable assumptions.
+2. **Always auto-link** — scan existing vault entries and inject `[[wikilinks]]` aggressively. False positives are cheap, missing links are expensive.
+3. **Date everything** — use today's date unless the user specifies otherwise.
+4. **Be opinionated about status:** "we should probably..." -> task (open), "we went with X" -> decision (active), "waiting on..." -> task (blocked), "we need to revisit..." -> decision (revisit).
+5. **Surface staleness** — flag anything untouched for 2+ weeks during reviews.
+6. **Conflict resolution** — if a new decision contradicts an existing one, mark the old one as `superseded` and link to the new one.
+
+## Tags
+
+Domain: `#backend`, `#frontend`, `#infra`, `#devops`, `#architecture`, `#security`, `#testing`, `#process`
+
+Status: `#active`, `#superseded`, `#revisit`, `#blocked`, `#stale`
+
+Priority: `#p0-critical`, `#p1-high`, `#p2-medium`, `#p3-low`
