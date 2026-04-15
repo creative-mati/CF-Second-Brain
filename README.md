@@ -435,6 +435,7 @@ No external services, no API keys, no cloud. Everything runs locally and writes 
 ```bash
 npm install          # Install dependencies
 npm run build        # Compile TypeScript to dist/
+npm test             # Run tests (80 tests, Vitest)
 npm start            # Run the MCP server (stdio transport)
 ```
 
@@ -451,7 +452,10 @@ src/
 │   ├── search-vault.ts    # Full-text search across vault
 │   ├── get-pending-tasks.ts  # Filtered task listing
 │   ├── get-vault-context.ts  # Cross-vault topic synthesis
-│   └── update-index.ts    # Index rebuilder
+│   ├── update-task.ts       # Update existing tasks (status, priority, notes)
+│   ├── update-decision.ts   # Update existing decisions (status, supersede)
+│   ├── weekly-review.ts     # Weekly review summary generator
+│   └── update-index.ts      # Index rebuilder
 └── utils/
     ├── paths.ts           # Directory constants, VAULT_PATH env var
     ├── vault.ts           # File I/O, wikilink injection, search
@@ -463,6 +467,10 @@ src/
 ```
 
 ---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to add tools, write tests, and submit PRs.
 
 ## License
 
