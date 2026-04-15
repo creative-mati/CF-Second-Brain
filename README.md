@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/mascot.png" alt="Second Brain mascot" width="300" />
+</p>
+
 # CF Second Brain
 
 An MCP server that gives your AI coding assistant persistent memory through an Obsidian vault. Decisions, tasks, and meeting notes survive across sessions and become searchable, linked knowledge.
@@ -24,6 +28,9 @@ AI:  Saved 4 files:
 | `search_vault` | Search vault by content and frontmatter, optionally filtered by type |
 | `get_pending_tasks` | Get open/blocked/in-progress tasks, sorted by priority |
 | `get_vault_context` | Cross-vault search — finds all mentions of a topic across every content type |
+| `update_task` | Update an existing task — change status, priority, due date, or append a note |
+| `update_decision` | Update an existing decision — change status, mark as superseded, or append a note |
+| `weekly_review` | Generate a weekly review summary with stats, stale items, and orphan detection |
 | `update_index` | Rebuild `vault/index.md` from current vault state |
 
 Key behaviors:
