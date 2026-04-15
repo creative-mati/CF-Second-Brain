@@ -206,6 +206,147 @@ This creates:
 
 ---
 
+## Examples
+
+### Save a decision
+
+```
+You: sb went with tailwind over styled-components for the new dashboard.
+     team agreed — better DX and smaller bundle.
+
+AI:  Saved:
+     - decisions/2026-04-15-tailwind-over-styled-components-for-dashboard.md
+       domain: [frontend], status: active
+```
+
+The generated file:
+
+```markdown
+---
+type: decision
+date: 2026-04-15
+status: active
+domain: [frontend]
+participants: []
+related_decisions: []
+tags: [frontend]
+---
+
+## Tailwind over styled-components for dashboard
+
+Went with tailwind over styled-components for the new dashboard.
+Team agreed — better DX and smaller bundle.
+```
+
+### Save a task with inferred metadata
+
+```
+You: sb need to migrate the old auth middleware before the compliance deadline march 30.
+     waiting on carlos to finish the API spec first.
+
+AI:  Saved:
+     - tasks/2026-04-15-migrate-old-auth-middleware.md
+       priority: p1-high, status: blocked, waiting_on: carlos, due: 2026-03-30
+     + people stub: carlos.md
+```
+
+Notice how the AI inferred:
+- `p1-high` priority from the deadline
+- `blocked` status from "waiting on"
+- `due: 2026-03-30` converted from "march 30"
+- Created a person stub for Carlos
+
+### Save meeting notes (auto-extracts decisions and tasks)
+
+```
+You: sb met with carlos and priya about the search service redesign.
+     decided to go with elasticsearch over solr — better ecosystem, priya has experience.
+     need to set up a staging cluster by friday.
+     carlos will handle the index mapping.
+     also need to update the API docs once the endpoints change.
+
+AI:  Saved 6 files:
+     - meetings/2026-04-15-meeting-search-service-redesign.md
+     - decisions/2026-04-15-elasticsearch-over-solr.md (extracted)
+     - tasks/2026-04-15-set-up-a-staging-cluster.md (due: 2026-04-18, extracted)
+     - tasks/2026-04-15-handle-the-index-mapping.md (extracted)
+     - tasks/2026-04-15-update-the-api-docs.md (extracted)
+     + people stubs: carlos.md, priya.md
+     + project stub: search-service.md
+```
+
+One dump, 6 files — all cross-linked. The meeting file links to the decision and tasks, each task links back to the meeting, and all mention `[[carlos]]`, `[[priya]]`, and `[[search-service]]`.
+
+### Quick note (auto-classified)
+
+```
+You: sb the deploy pipeline takes 45 minutes, that's way too long
+
+AI:  Saved (auto-classified as task):
+     - tasks/2026-04-15-the-deploy-pipeline-takes-45-minutes.md
+       priority: p2-medium, status: open
+```
+
+No clear signal words, so the server classified it as a task (bias toward actionability).
+
+### Search decisions
+
+```
+You: sb what did we decide about search?
+
+AI:  Found 1 result:
+     - decisions/2026-04-15-elasticsearch-over-solr.md
+       "Decided to go with elasticsearch over solr — better ecosystem,
+        priya has experience."
+       Participants: carlos, priya | Status: active
+```
+
+### Check pending tasks
+
+```
+You: sb what's pending?
+
+AI:  Found 4 tasks:
+
+     P1 — High
+     - [ ] Migrate old auth middleware (due: 2026-03-30, blocked on carlos)
+
+     P2 — Medium
+     - [ ] Set up staging cluster (due: 2026-04-18)
+     - [ ] Handle the index mapping
+     - [ ] Update the API docs
+```
+
+### Check what you know about a topic
+
+```
+You: sb what do I know about carlos?
+
+AI:  Direct match: people/carlos.md
+
+     Mentions across vault (5):
+     - meetings: Search service redesign (attendee)
+     - decisions: Elasticsearch over Solr (participant)
+     - tasks: Handle the index mapping (assigned)
+     - tasks: Migrate old auth middleware (blocking)
+```
+
+### Ambiguous input — decision + task
+
+```
+You: sb we're going with monorepo for the new project. need to set up turborepo this week.
+
+AI:  Saved:
+     - decisions/2026-04-15-monorepo-for-the-new-project.md
+       domain: [architecture], status: active
+     - tasks/2026-04-15-set-up-turborepo.md
+       priority: p2-medium, due: 2026-04-18
+```
+
+The AI detected both a decision ("going with") and a task ("need to") in the same message and created separate files for each.
+
+---
+
 ## Vault Structure
 
 ```
