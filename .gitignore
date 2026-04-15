@@ -1,0 +1,20 @@
+# Vault content (personal — never commit)
+vault/decisions/*.md
+vault/tasks/*.md
+vault/meetings/*.md
+vault/people/*.md
+vault/projects/*.md
+vault/weekly/*.md
+vault/index.md
+
+# Obsidian workspace files (user-specific)
+vault/.obsidian/workspace.json
+vault/.obsidian/workspace-mobile.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+node_modules/
