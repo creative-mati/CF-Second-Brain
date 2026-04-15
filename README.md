@@ -50,7 +50,7 @@ Key behaviors:
 
 ```bash
 # 1. Clone
-git clone https://github.com/creative-mati/CF-Second-Brain.git
+git clone https://github.com/creativefabrica/CF-Second-Brain.git
 cd CF-Second-Brain
 
 # 2. Install and build
